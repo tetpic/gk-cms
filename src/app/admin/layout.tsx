@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation"
 import AdminNavigation from "./adminNavigation"
 import checkAdmin from "@/helpers/checkAdmin"
+import { useEffect } from "react"
 
 
 
@@ -13,7 +14,11 @@ export default function AdminMainLayout
     children: React.ReactNode
 }) 
 {   
-  if(checkAdmin()) {    
+  if(checkAdmin()) {  
+    useEffect(() => {
+
+      require('bootstrap/dist/js/bootstrap') 
+  }, [])  
       return (
         <div className='row'>     
         <AdminNavigation/>

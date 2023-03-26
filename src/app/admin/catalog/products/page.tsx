@@ -1,5 +1,5 @@
 export default function ProductsPage() {
     return <>
-    <div>Рендер каталога</div>
+    <div>Рендер каталога товаров</div>
     </>
 }

@@ -4,11 +4,14 @@
 
 import checkAdmin from "@/helpers/checkAdmin";
 import Link from "next/link";
+// import { useServerEffect } from "react";
 
 // const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   let isAdmin = checkAdmin()
+
+
   return (
     <Link className={'nav-link ' + (isAdmin ? '':'disabled')}  href="/admin">Админка</Link>
     // <main className={styles.main}>
