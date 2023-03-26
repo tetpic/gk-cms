@@ -2,13 +2,15 @@
 // import { Inter } from 'next/font/google'
 // import styles from './page.module.scss'
 
+import checkAdmin from "@/helpers/checkAdmin";
 import Link from "next/link";
 
 // const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  let isAdmin = checkAdmin()
   return (
-    <Link href="/admin">Админка</Link>
+    <Link className={'nav-link ' + (isAdmin ? '':'disabled')}  href="/admin">Админка</Link>
     // <main className={styles.main}>
     //   <div className={styles.description}>
     //     <p>

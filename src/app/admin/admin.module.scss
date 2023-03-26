@@ -4,3 +4,9 @@
     color: rgb(187, 50, 40) !important;
     
 }
+
+.hidden {
+    opacity: .3;
+    color: black;
+    pointer-events: none;
+}
