@@ -1,19 +1,21 @@
-// import Image from 'next/image'
-// import { Inter } from 'next/font/google'
-// import styles from './page.module.scss'
-
 import checkAdmin from "@/helpers/checkAdmin";
 import Link from "next/link";
-// import { useServerEffect } from "react";
-
-// const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   let isAdmin = checkAdmin()
 
-
   return (
     <Link className={'nav-link ' + (isAdmin ? '':'disabled')}  href="/admin">Админка</Link>
+  )
+}
+
+
+
+
+
+
+ // не удалял этот код пока что, чтобы брать отсюда примеры
+
     // <main className={styles.main}>
     //   <div className={styles.description}>
     //     <p>
@@ -95,5 +97,3 @@ export default function Home() {
     //     </a>
     //   </div>
     // </main>
-  )
-}

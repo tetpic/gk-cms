@@ -1,30 +1,23 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { createSlice } from '@reduxjs/toolkit'
+"use client"
+import { configureStore } from "@reduxjs/toolkit";
+import authReducer  from "./authUserSlice";
+import productsReducer, { ProductsInitialState } from "./productsSlice";
 
-// create a slice 
-export const authSlice= createSlice({
-name:"authorized",
-initialState:{
-    auth: true
-},
-reducers:{
-    setTrue:state=>{
-        state.auth=true
-    },
-    setFalse:state=>{
-        state.auth=false
-    },
-   }
-})
+
 // config the store 
 const store= configureStore({
-   reducer: {
-      authorized: authSlice.reducer
-   }
-})
+    reducer: {
+       products: productsReducer,
+       authorized: authReducer 
+    }
+ })
+ 
+
+// Infer the `RootState` and `AppDispatch` types from the store itself
+export type RootState = ReturnType<typeof store.getState>
+// export type IRootState = ReturnType<typeof store>;
+// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+export type AppDispatch = typeof store.dispatch
 
 // export default the store 
 export default store
-
-// export the action
-export const iconAction = authSlice.actions
