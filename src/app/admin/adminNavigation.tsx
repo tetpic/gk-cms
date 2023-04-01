@@ -7,15 +7,15 @@ export default function  AdminNavigation() {
     const router = usePathname()
     return  <>
         <ul className="nav flex-column col-3">
-            <li className="nav-item">
+            <li className="nav-item" key="mainLink">
                 <Link className={'nav-link ' + (router=='/admin'? s.active : '')} aria-current="page" href="/admin">Главная</Link>
             </li>
 
-            <li className="nav-item">
+            <li className="nav-item" key="productsLink">
               <Link className={'nav-link ' + (router=='/admin/products'? s.active:'')} href="/admin/products">Товары</Link>
             </li>
 
-            <li className="nav-item accordion">
+            <li className="nav-item accordion" key="catalogLink">
                 <h2 className="accordion-header" id="headingOne">
                     <button className={"accordion-button " + (router.indexOf('/admin/catalog/') >= 0? s.active:'')} type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                       Каталог
@@ -31,11 +31,11 @@ export default function  AdminNavigation() {
                 </div>
             </li>
 
-            <li className="nav-item">
+            <li className="nav-item" key="categoriesLink">
               <Link className={'nav-link disabled ' + (router=='/admin/categories'? s.active:'')} href="/admin/categories">Категории</Link>
             </li>
             
-            <li className="nav-item">
+            <li className="nav-item" key="seoLink">
               <Link className={'nav-link disabled ' + (router=='/admin/seo'? s.active:'')} href="/admin/seo" tabIndex={-1}>SEO</Link>
             </li>
     </ul>

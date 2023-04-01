@@ -1,9 +1,9 @@
 "use client"
 
-import { ProductsInitialState, getProducts } from "@/redux/productsSlice"
-import { RootState } from "@/redux/store"
-import { useEffect } from "react"
-// import { useEffect } from "react"
+import getAllProducts from "@/app/api/hello/products/products"
+import {getProducts, setProducts} from "@/redux/productsSlice"
+import {RootState} from "@/redux/store"
+import {use, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
 
@@ -13,36 +13,61 @@ import { useDispatch, useSelector } from "react-redux"
 you have to wait fot thunk actions to finish to pre hydrate 
 data fetched with tunk and it is recommended to use getServerSideProps
  or getStaticProps instead. */
+type OneProduct = {
+    id: number,
+    data: string,
+    time: string
+}
 
-function product(arr: any) {
-    arr[0].map((el: any)=> {
-        
-        return <p>
-            {el.id}
-        </p>    
-    })
+function product(props:OneProduct) {
+    
+    return <>
+        <div key={props.id}>
+            <p>{props.id}</p>
+            <p>{props.data}</p>
+            <p>{props.time}</p>
+        </div>
+    </>
 
 }
 
 export default function ProductsPage() {
-    // const products = useSelector((state: RootState)=>{
-        // state.products
-    // })
-    const dispatch = useDispatch<any>()
-    useEffect(()=> {
-        dispatch(getProducts())
-    }, [dispatch])
     
-    
-    const products  = useSelector((state:RootState) => state.products)
-    
+    //эти данные грузятся конкретно сервером
+    const serverProducts = use(getAllProducts())
 
-    return (products.isLoading?
-        <div className="spinner-border text-secondary" role="status"></div>
-        :
-        products.products[0][0].data
-        // product(products.products)
-        )
+
+
+    const dispatch = useDispatch<any>()
+    const products  = useSelector((state:RootState) => state.products)
+    useEffect(()=> {
+            dispatch(getProducts())
+    }, [dispatch])
+
+
+    // useEffect(()=> {
+    //     dispatch(setProducts(serverProducts))
+    // }, [products, dispatch])
     
- 
+    
+//     let consoleIt = () => {
+//         dispatch(setProducts(serverProducts))
+//     //     // getProducts()
+
+//     //     // dispatchProducts
+//     //    
+// }
+    console.log(products.products[0])
+
+
+    return (<>{
+
+        products.products.map((element:any) => {
+            
+            return product(element)
+        })
+    }
+    {/* <button onClick={()=>{consoleIt()}}>console it</button> */}
+        </>
+    )
 }
