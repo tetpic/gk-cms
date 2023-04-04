@@ -1,5 +1,3 @@
-
-import { Provider } from 'react-redux'
 import './globals.scss'
 import 'bootstrap/dist/css/bootstrap.css'
 import store from '@/redux/store'

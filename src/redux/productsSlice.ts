@@ -1,13 +1,19 @@
 "use client"
-import getAllProducts from '@/app/api/hello/products/products'
+import {NewProduct, getAllProducts, postNewProduct} from '@/app/api/hello/products/products'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { HYDRATE } from 'next-redux-wrapper'
 
-// export const fetch
+interface AddNewProduct {
+    productBody: string,
+    productTime: string
+}
+
 export interface ProductsInitialState  {
     products : any,
-    isLoading: boolean,
-    error: string
+    isAllProductsLoading: boolean,
+    isAddProductLoading: boolean,
+    error: string,
+    fetched: boolean,
+    newProduct: AddNewProduct
 
 }
 
@@ -18,35 +24,53 @@ export const getProducts = createAsyncThunk('products/getProducts',
     }
 )
 
+export const postProduct = createAsyncThunk('products/postNewProduct', 
+
+    async function (object:NewProduct) {
+        const data = await postNewProduct(object)
+        return await data
+    }
+)
+
 export  const productsSlice= createSlice({
 name:"products",
 initialState: <ProductsInitialState> {
     products: [],
-    isLoading: false,
-    error: ''
+    isAllProductsLoading: false,
+    isAddProductLoading: false,
+    error: '',
+    fetched: false,
+    newProduct: {
+        productBody: '',
+        productTime: ''
+    }
 },
 reducers:{
     addProduct(state, action) {
-        
         state.products = [...state.products, action.payload]
     },
-    setProducts(state, action) {
-        debugger
+    setProducts(state, action) {  
         state.products = [...state.products, action.payload]
-        // console.log(state.products)
+        state.fetched = true
     }
 },
 extraReducers: (builder) => {
-   
-      
+
     builder.addCase(getProducts.pending, (state) => {
-        state.isLoading = true
+        state.isAllProductsLoading = true
         state.error = ''        
     })
     builder.addCase(getProducts.fulfilled, (state, action) => {        
         state.products = [...action.payload] 
-        state.isLoading = false
-     
+        state.isAllProductsLoading = false
+    })
+    builder.addCase(postProduct.pending, (state)=> {
+        state.isAddProductLoading = true
+        state.error = ''
+    })
+    builder.addCase(postProduct.fulfilled, (state, action)=> {
+        state.products = [...state.products, ...action.payload]
+        state.isAddProductLoading = false
     })
 },
 })
