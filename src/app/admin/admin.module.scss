@@ -10,3 +10,19 @@
     color: black;
     pointer-events: none;
 }
+
+.nav {
+    row-gap: 10px;
+}
+
+.header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: black;
+    display: flex;
+    margin: 0 auto 30px;
+    padding: 20px 80px;
+    align-items: center;
+    column-gap:  40px;
+}

@@ -24,6 +24,11 @@
       "data": "Lorem ipsum dolor est pelet oren",
       "time": "14:32",
       "id": 5
+    },
+    {
+      "data": "Тестовые данные на русском языке из POSTMAN",
+      "time": "14:32",
+      "id": 6
     }
   ]
 }
