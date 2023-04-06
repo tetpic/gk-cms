@@ -13,7 +13,8 @@ export default function AdminMainLayout({
 }: {
   children: React.ReactNode;
 }) {
-  if (checkAdmin()) {
+  // const isAuth = checkAdmin()
+  // if (isAuth) {
     useEffect(() => {
       require('bootstrap/dist/js/bootstrap');
     }, []);
@@ -32,8 +33,8 @@ export default function AdminMainLayout({
         </div>
       </>
     );
-  } else {
-    const router = useRouter();
-    router.push('/');
-  }
+  // } else {
+  //   const router = useRouter();
+  //   router.push('/');
+  // }
 }

@@ -8,7 +8,7 @@ import {
 } from '@reduxjs/toolkit';
 import authReducer from './authUserSlice';
 import productsReducer, { ProductsInitialState } from './productsSlice';
-import { createWrapper, HYDRATE } from 'next-redux-wrapper';
+import { createWrapper, } from 'next-redux-wrapper';
 
 // config the store
 const store = configureStore({
