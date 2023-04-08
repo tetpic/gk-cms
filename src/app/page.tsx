@@ -7,7 +7,7 @@ export default function Home() {
 
   return (
     <>
-      <LoginUserForm/>
+      <LoginUserForm />
       <Link className={'nav-link '} href="/admin">Админка</Link>
     </>
   )

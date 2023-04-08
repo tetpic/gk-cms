@@ -38,6 +38,36 @@
       "password": "test",
       "email": "email@gorika.ru",
       "role": "admin"
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "name": "test",
+      "email": "test1",
+      "password": "123",
+      "id": 4
+    },
+    {
+      "name": "test 2",
+      "email": "test2.mail",
+      "password": "test",
+      "id": 5
+    },
+    {
+      "name": "test5",
+      "email": "test5",
+      "password": "test5",
+      "id": 6
+    },
+    {
+      "name": "nikis",
+      "email": "test",
+      "password": "123123",
+      "id": 7
     }
   ]
 }

@@ -1,30 +1,16 @@
 "use client"
 import { isAuthUser } from '@/app/api/user/userAuth'
+import { AuthUser, Roles, User } from '@/app/api/user/userTypes'
 import { configureStore } from '@reduxjs/toolkit'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 // export const fetch
 
-enum Roles { 'guest', 'admin', 'user' }
-
-export interface User {
-    name: string,
-    email: string,
-    password?: string,
-    id?: number 
-}
-
-interface AuthUser extends User {
-    auth: boolean,
-    role: Roles,     
-}
 
 interface UserInitialState {
     user: AuthUser,
     isLoading: boolean,    
 }
-
-
 
 
 

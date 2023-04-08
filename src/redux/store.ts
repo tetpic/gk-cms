@@ -1,13 +1,9 @@
 'use client';
-import {
-  Action,
-  AnyAction,
-  ThunkAction,
-  combineReducers,
-  configureStore,
-} from '@reduxjs/toolkit';
+import {Action,ThunkAction,configureStore,} from '@reduxjs/toolkit';
+
+import productsReducer from './productsSlice';
 import authReducer from './authUserSlice';
-import productsReducer, { ProductsInitialState } from './productsSlice';
+import loginReducer from './loginSlice';
 import { createWrapper, } from 'next-redux-wrapper';
 
 // config the store
@@ -15,6 +11,7 @@ const store = configureStore({
   reducer: {
     products: productsReducer,
     authorized: authReducer,
+    login: loginReducer
   },
 });
 
