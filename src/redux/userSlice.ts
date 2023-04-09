@@ -1,23 +1,12 @@
 "use client"
-import { sendUser } from '@/app/api/user/userLogin'
 import { LoginUser} from '@/app/api/user/userTypes'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { RootState } from './store'
+import { getMyself } from '@/app/api/user/user'
 
 
-
-
-
-export const sendUserData = createAsyncThunk('users/checkUser', 
-    // async function (object:LoginUser) {
-    //     debugger
-    //     const data = await sendUser(object)
-    //     return await data
-    // }
-    async function (arg, {getState}) {        
-        let {login} = getState() as RootState
-        let object: LoginUser = {name: login.name, email: login.email, password: login.password}
-        const data = await sendUser(object)
+export const getUser = createAsyncThunk('users/checkUser', 
+    async function () {        
+        const data = await getMyself()
         return  data
     }
 )
@@ -25,7 +14,6 @@ export const sendUserData = createAsyncThunk('users/checkUser',
 interface LoginInitialState extends LoginUser  {
     isLoading: boolean,
     loggedIn: boolean,  
-    // id: number | any   
     error: string|undefined,
     message: string
 }
@@ -36,14 +24,12 @@ let initialState :  LoginInitialState = {
     password: '',  
     isLoading: false,
     loggedIn: false,
-    // id: undefined,
     error: undefined,
     message: ''
-
 }
 
 // create a slice 
-export const loginSlice= createSlice({
+export const userSlice= createSlice({
 name:"authorized",
 initialState: initialState,
 reducers:{
@@ -58,13 +44,13 @@ reducers:{
     },  
 },
 extraReducers(builder) {
-    builder.addCase(sendUserData.pending, (state) => {
+    builder.addCase(getUser.pending, (state) => {
         state.isLoading = true                
     }),
-    builder.addCase(sendUserData.rejected, (state, action: any) => {     
+    builder.addCase(getUser.rejected, (state, action: any) => {     
         state.error = action.payload      
     }),
-    builder.addCase(sendUserData.fulfilled, (state, action) => {  
+    builder.addCase(getUser.fulfilled, (state, action) => {  
         state.isLoading = false
         state.loggedIn = true  
     })
@@ -75,7 +61,7 @@ extraReducers(builder) {
 })
 
 //export the reducer
-export default loginSlice.reducer
+export default userSlice.reducer
 // export the action
-export const {setName,setEmail, setPassword} = loginSlice.actions
-export const loginAction = loginSlice.actions
+export const {setName,setEmail, setPassword} = userSlice.actions
+export const loginAction = userSlice.actions

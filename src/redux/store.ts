@@ -2,16 +2,18 @@
 import {Action,ThunkAction,configureStore,} from '@reduxjs/toolkit';
 
 import productsReducer from './productsSlice';
-import authReducer from './authUserSlice';
+import regReducer from './registratoinSlice';
 import loginReducer from './loginSlice';
+import userReducer from './userSlice';
 import { createWrapper, } from 'next-redux-wrapper';
 
 // config the store
 const store = configureStore({
   reducer: {
     products: productsReducer,
-    authorized: authReducer,
-    login: loginReducer
+    register: regReducer,
+    login: loginReducer, 
+    user: userReducer
   },
 });
 

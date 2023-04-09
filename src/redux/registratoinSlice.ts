@@ -1,22 +1,19 @@
 "use client"
-import { isAuthUser } from '@/app/api/user/userAuth'
+import { registerNewUser } from '@/app/api/user/userRegister'
 import { AuthUser, Roles, User } from '@/app/api/user/userTypes'
 import { configureStore } from '@reduxjs/toolkit'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-
-// export const fetch
 
 
 interface UserInitialState {
     user: AuthUser,
     isLoading: boolean,    
+    isRegistered: boolean
 }
 
-
-
-export const checkUser = createAsyncThunk('users/checkUser', 
+export const registerUser = createAsyncThunk('users/registerUser', 
     async function (object:User) {
-        const data = await isAuthUser(object)
+        const data = await registerNewUser(object)
         return await data
     }
 )
@@ -26,13 +23,15 @@ let initialState :  UserInitialState = {
     auth: false,
     role: Roles.guest,
     name: '',
-    email: ''
+    email: '',
+    id: undefined
    },
    isLoading: false,
+   isRegistered: false
 }
 
 // create a slice 
-export const authSlice= createSlice({
+export const registrationSlice= createSlice({
 name:"authorized",
 initialState: initialState,
 reducers:{
@@ -44,26 +43,19 @@ reducers:{
     },
 },
 extraReducers(builder) {
-    builder.addCase(checkUser.pending, (state) => {
+    builder.addCase(registerUser.pending, (state) => {
         state.isLoading = true                
     })
-    builder.addCase(checkUser.fulfilled, (state, action) => {        
+    builder.addCase(registerUser.fulfilled, (state, action) => {        
         state.user = {...action.payload} 
         state.isLoading = false
-    })
-    // builder.addCase(postProduct.pending, (state)=> {
-    //     state.isAddProductLoading = true
-    //     state.error = ''
-    // })
-    // builder.addCase(postProduct.fulfilled, (state, action)=> {
-    //     state.products = [...state.products, ...action.payload]
-    //     state.isAddProductLoading = false
-    // })    
+        state.isRegistered = true
+    })   
 },
 
 })
 
 //export the reducer
-export default authSlice.reducer
+export default registrationSlice.reducer
 // export the action
-export const authActions = authSlice.actions
+export const authActions = registrationSlice.actions

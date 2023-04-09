@@ -3,10 +3,13 @@
 import { setEmail, setName, setPassword, sendUserData } from "@/redux/loginSlice"
 import { RootState } from "@/redux/store"
 import { useAppDispatch } from "@/redux/types"
+import { useRouter } from "next/navigation"
 import { useSelector } from "react-redux"
 
+// Форма логинизации уже существующего пользователя
+
 export default function LoginUserForm() {
-    let {name, password, email, isCreated, id} = useSelector((state:RootState)=> state.login)
+    let {name, password, email, loggedIn, message} = useSelector((state:RootState)=> state.login)
     const dispatch = useAppDispatch()
 
     let loginInputHandler = (evt: { target: { value: string, name: string } }) => {
@@ -32,12 +35,14 @@ export default function LoginUserForm() {
     let submitHandler=()=>{
         dispatch(sendUserData())
     }
+
+    let router = useRouter()
   
 
     
     return <>
+    <h3 className="h3">Авторизация</h3>
     <form className="">
-
         <div className="form-group">
             <label htmlFor="formGroupExampleInput2">Name
                 <input name="name" type="text" value={name} className="form-control" onChange={loginInputHandler} placeholder="Your Name"/>
@@ -57,13 +62,9 @@ export default function LoginUserForm() {
         </div>
 
         <button type="button" onClick={submitHandler} className="btn btn-primary">Send</button>
-
-
-
     </form>
 
-    {/* TODO: если пользователь создался, редиректим на страницу личного кабинета, где и будет переход в админку */}
 
-    {isCreated == true? <p>{name + id + email + password}</p> : <p>Not Created</p>}
+    {loggedIn == true? router.push('/user') : <p>{message !== ''? message: "нет такого пользователя"}</p>}
     </>
 } 

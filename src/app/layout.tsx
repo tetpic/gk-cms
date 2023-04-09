@@ -19,13 +19,10 @@ export default function RootLayout({
   
   return (
     <html lang="ru">
-      <body>
-
-        <div className='main-wrapper'>
+      <body>       
           <Providers>
             {children}
-          </Providers>
-        </div>
+          </Providers>       
       </body>
     </html>
   )

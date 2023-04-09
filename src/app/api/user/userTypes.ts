@@ -5,7 +5,7 @@ export interface User {
     name: string,
     email: string,
     password?: string,
-    id?: number 
+    id?: number|undefined 
 }
 
 export interface AuthUser extends User {

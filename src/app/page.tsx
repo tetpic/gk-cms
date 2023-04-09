@@ -1,14 +1,13 @@
-import checkAdmin from "@/helpers/checkAdmin";
+
 import Link from "next/link";
-import LoginUserForm from "./login";
+import MainPageLayout from "./main/mainPageLayout";
 
 export default function Home() {
-  // let isAdmin = checkAdmin()
-
   return (
-    <>
-      <LoginUserForm />
-      <Link className={'nav-link '} href="/admin">Админка</Link>
+    <> 
+       <MainPageLayout>
+          <div>Контент главной страницы</div>
+       </MainPageLayout>
     </>
   )
 }

@@ -1,11 +1,9 @@
 "use client"
-import {NewProduct, getAllProducts, postNewProduct} from '@/app/api/hello/products/products'
+import { getAllProducts, postNewProduct } from '@/app/api/products/products'
+import { AddNewProduct, NewProduct } from '@/app/api/products/productsTypes'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
-interface AddNewProduct {
-    productBody: string,
-    productTime: string
-}
+
 
 export interface ProductsInitialState  {
     products : any,

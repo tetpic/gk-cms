@@ -1,13 +1,12 @@
+import { NewProduct } from "./productsTypes";
+
 export async function getAllProducts() {
     const request = await fetch('http://localhost:4000/products')
     const response = await request.json();
     return response
 }
 
-export type NewProduct = {
-    data: string,
-    time: string
-}
+
 
 export async function postNewProduct(data: NewProduct) {
     let json = JSON.stringify(data)
