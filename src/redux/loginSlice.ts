@@ -35,11 +35,9 @@ let initialState :  LoginInitialState = {
     email: '',
     password: '',  
     isLoading: false,
-    loggedIn: false,
-    // id: undefined,
+    loggedIn: false,   
     error: undefined,
     message: ''
-
 }
 
 // create a slice 
