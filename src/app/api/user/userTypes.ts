@@ -4,7 +4,7 @@ export enum Roles { 'guest', 'admin', 'user' }
 export interface User {
     name: string,
     email: string,
-    password?: string,
+    password?: string|undefined,
     id?: number|undefined 
 }
 
@@ -16,6 +16,6 @@ export interface AuthUser extends User {
 export type LoginUser = {
     name: string,
     email: string,
-    password: string
+    password: string|undefined
 }
 

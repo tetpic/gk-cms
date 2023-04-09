@@ -9,6 +9,7 @@ export async function registerNewUser(data: User) {
     // const request = await fetch('http://localhost:4000/users', {
 
     //Серегино апи
+    
     const request = await fetch('http://0.0.0.0:80/api/reg', {
         method: "POST",
         headers: {

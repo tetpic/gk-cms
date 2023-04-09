@@ -6,6 +6,6 @@ export async function getMyself() {
     //Серёгино апи
     const request = await fetch('http://0.0.0.0:80/api/users')
     const response = await request.json();
-    debugger
+    
     return response
 }

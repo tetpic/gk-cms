@@ -15,6 +15,6 @@ export async function sendUser(userData: LoginUser) {
         body: json,
     })
     const response = await request.text();
-    debugger
+    
     return response
 }

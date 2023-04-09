@@ -9,11 +9,6 @@ import { RootState } from './store'
 
 
 export const sendUserData = createAsyncThunk('users/checkUser', 
-    // async function (object:LoginUser) {
-    //     debugger
-    //     const data = await sendUser(object)
-    //     return await data
-    // }
     async function (arg, {getState}) {        
         let {login} = getState() as RootState
         let object: LoginUser = {name: login.name, email: login.email, password: login.password}
