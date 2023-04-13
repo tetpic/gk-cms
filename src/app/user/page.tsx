@@ -1,22 +1,24 @@
 "use client"
 
 import { useSelector } from "react-redux";
-import LoginUserForm from "./login/userLogin";
 import { RootState } from "@/redux/store";
 import Link from "next/link";
 import UserProfile from "./userProfile";
-import RegisterNewUser from "./register/userRegistration";
 import { useAppDispatch } from "@/redux/types";
-import { getUser } from "@/redux/userSlice";
+import { getUser, checkMyself } from "@/redux/userSlice";
+import { useEffect } from "react";
+import { Roles } from "../api/user/userTypes";
 
 export default function User () {
-    let {loggedIn} = useSelector((state:RootState)=> state.login)
-
     let dispatch = useAppDispatch()
+    useEffect(()=>{
+        dispatch(checkMyself())
+    }, [])   
 
 
+    let role:unknown = useSelector((state:RootState)=> state.user.role)
 
-    if(loggedIn) {
+    if(role === 'root' || role === 'admin') {
         return <>
         <button onClick={()=>{dispatch(getUser())}}>Получить пользователей</button>
         <UserProfile/>

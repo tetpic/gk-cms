@@ -1,21 +1,20 @@
 
-export enum Roles { 'guest', 'admin', 'user' }
+export enum Roles { 'guest', 'admin', 'user', 'root' }
 
 export interface User {
     name: string,
     email: string,
-    password?: string|undefined,
     id?: number|undefined 
 }
+
 
 export interface AuthUser extends User {
     auth: boolean,
     role: Roles,     
 }
 
-export type LoginUser = {
-    name: string,
-    email: string,
-    password: string|undefined
+export interface LoginUser extends User {
+    password: string|undefined,
 }
+
 

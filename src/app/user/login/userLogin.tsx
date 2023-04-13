@@ -65,6 +65,6 @@ export default function LoginUserForm() {
     </form>
 
 
-    {loggedIn == true? router.push('/user') : <p>{message !== ''? message: "нет такого пользователя"}</p>}
+    {loggedIn == true? router.push('/user') : ''}
     </>
 } 

@@ -1,24 +1,18 @@
 "use client"
 import { registerNewUser } from '@/app/api/user/userRegister'
-import { AuthUser, LoginUser, Roles, User } from '@/app/api/user/userTypes'
+import { LoginUser} from '@/app/api/user/userTypes'
 import { configureStore } from '@reduxjs/toolkit'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { RootState } from './store'
 
 
 interface UserInitialState {
-    user: AuthUser,
+    user: LoginUser,
     isLoading: boolean,    
     isRegistered: boolean
 }
 
 export const registerUser = createAsyncThunk('users/registerUser', 
-    // async function (arg, {getState}) {        
-    //     let {login} = getState() as RootState
-    //     let object: LoginUser = {name: login.name, email: login.email, password: login.password}
-    //     const data = await sendUser(object)
-    //     return  data
-    // }
     async function (arg, {getState}) {
         let {register} = getState() as RootState
         let object: LoginUser = {name: register.user.name, email: register.user.email, password: register.user.password}
@@ -28,9 +22,7 @@ export const registerUser = createAsyncThunk('users/registerUser',
 )
 
 let initialState :  UserInitialState = {
-   user: {
-    auth: false,
-    role: Roles.guest,
+   user: {       
     name: '',
     email: '',
     id: undefined,

@@ -1,10 +1,18 @@
+import { API_PATH, STORAGE } from "@/helpers/constants";
 
 
 export async function getMyself() {
     // const request = await fetch('http://localhost:4000/users', {
+    let token = STORAGE.getItem('Authenticate')
 
     //Серёгино апи
-    const request = await fetch('http://0.0.0.0:80/api/users')
+    const request = await fetch( API_PATH + '/api/users?api_token='+token, {
+        headers: {
+            'Authorisation' : `${token}`,
+            'Accept' : 'application/json',
+            credentials: 'include'
+        }
+    })
     const response = await request.json();
     
     return response

@@ -1,7 +1,8 @@
 "use client"
-import { LoginUser} from '@/app/api/user/userTypes'
+import { AuthUser, Roles} from '@/app/api/user/userTypes'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { getMyself } from '@/app/api/user/user'
+import { STORAGE } from '@/helpers/constants'
 
 
 export const getUser = createAsyncThunk('users/checkUser', 
@@ -11,21 +12,22 @@ export const getUser = createAsyncThunk('users/checkUser',
     }
 )
 
-interface LoginInitialState extends LoginUser  {
+interface UserInitialState extends AuthUser  {
     isLoading: boolean,
-    loggedIn: boolean,  
     error: string|undefined,
-    message: string
+    message: string,
+   
 }
 
-let initialState :  LoginInitialState = {
+let initialState :  UserInitialState = {
     name: '',
-    email: '',
-    password: '',  
+    email: '',  
+    message: '',
     isLoading: false,
-    loggedIn: false,
-    error: undefined,
-    message: ''
+    error: undefined,     
+    id: undefined,
+    auth: false,
+    role: Roles.guest
 }
 
 // create a slice 
@@ -38,10 +40,14 @@ reducers:{
     },
     setEmail:(state, action)=>{
         state.email = action.payload 
-    },
-    setPassword: (state, action) => {
-        state.password = action.payload
     },  
+    checkMyself: (state) => {
+        let role = STORAGE.getItem('role') as unknown
+        state.id = Number(STORAGE.getItem('id'))??undefined
+        state.email = STORAGE.getItem('email')??''
+        state.role = role as Roles??Roles.guest
+        
+    }
 },
 extraReducers(builder) {
     builder.addCase(getUser.pending, (state) => {
@@ -51,11 +57,9 @@ extraReducers(builder) {
         state.error = action.payload      
     }),
     builder.addCase(getUser.fulfilled, (state, action) => {  
-        state.isLoading = false
-        state.loggedIn = true  
-    })
-  
-   
+        console.log(action.payload)
+        state.isLoading = false         
+    })   
 },
 
 })
@@ -63,5 +67,5 @@ extraReducers(builder) {
 //export the reducer
 export default userSlice.reducer
 // export the action
-export const {setName,setEmail, setPassword} = userSlice.actions
+export const {setName,setEmail, checkMyself} = userSlice.actions
 export const loginAction = userSlice.actions

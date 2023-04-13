@@ -7,6 +7,7 @@ import goriLogo from '../../../public/gorilka-logo.png';
 import s from './admin.module.scss';
 import Link from 'next/link';
 import { useAppSelector } from '@/redux/types';
+import { Roles } from '../api/user/userTypes';
 
 export default function AdminMainLayout({
   children,
@@ -14,15 +15,14 @@ export default function AdminMainLayout({
   children: React.ReactNode;
 }) {
 
-  let {loggedIn} = useAppSelector(state=> state.login)
+  let {auth, role} = useAppSelector(state=> state.user)
 
-  alert(loggedIn)
 
     useEffect(() => {
       require('bootstrap/dist/js/bootstrap');
     }, []);
 
-    if (loggedIn) {
+    if (auth && role == Roles.admin) {
 
       return (
         <>

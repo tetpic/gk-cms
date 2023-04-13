@@ -3,24 +3,32 @@ import { sendUser } from '@/app/api/user/userLogin'
 import { LoginUser} from '@/app/api/user/userTypes'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { RootState } from './store'
+import { STORAGE } from '@/helpers/constants'
 
-
-
+type UserDataResponse = {
+    name: string,
+    email: string,
+    role: string,
+    api_token: string, 
+    id: number
+}
 
 
 export const sendUserData = createAsyncThunk('users/checkUser', 
     async function (arg, {getState}) {        
         let {login} = getState() as RootState
         let object: LoginUser = {name: login.name, email: login.email, password: login.password}
-        const data = await sendUser(object)
-        return  data
+        let data = await sendUser(object)   
+        let responce = JSON.parse(data) as UserDataResponse        
+        return  responce 
     }
 )
 
+
+
 interface LoginInitialState extends LoginUser  {
     isLoading: boolean,
-    loggedIn: boolean,  
-    // id: number | any   
+    loggedIn: boolean,     
     error: string|undefined,
     message: string
 }
@@ -58,11 +66,17 @@ extraReducers(builder) {
         state.error = action.payload      
     }),
     builder.addCase(sendUserData.fulfilled, (state, action) => {  
+        debugger            
         state.isLoading = false
         state.loggedIn = true  
-    })
-  
-   
+        if(action.payload.id) {
+            STORAGE.setItem('Authenticate', action.payload.api_token)
+            STORAGE.setItem('userName', action.payload.name)
+            STORAGE.setItem('id', `${action.payload.id}`)
+            STORAGE.setItem('email', `${action.payload.name}`)
+            STORAGE.setItem('role', `${action.payload.role}`)
+        }
+    })   
 },
 
 })
