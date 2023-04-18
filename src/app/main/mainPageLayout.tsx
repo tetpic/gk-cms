@@ -1,6 +1,6 @@
 import MainFooter from './mainFooter'
 import MainHeader from './mainHeader'
-import s from './mainLayout.module.scss'
+import s from '../page.module.scss'
 
 export default function  MainPageLayout({
     children,
@@ -9,7 +9,7 @@ export default function  MainPageLayout({
   }) {
     return <>
     <MainHeader/>
-    <div className="main-wrapper">
+    <div className={s.mainWrapper}>
       {children}
     </div>
     <MainFooter/>  

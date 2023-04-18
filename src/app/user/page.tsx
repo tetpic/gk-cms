@@ -8,28 +8,33 @@ import { useAppDispatch } from "@/redux/types";
 import { getUser, checkMyself } from "@/redux/userSlice";
 import { useEffect } from "react";
 import { Roles } from "../api/user/userTypes";
+import UserPageLayout from "./layout";
 
 export default function User () {
     let dispatch = useAppDispatch()
+
     useEffect(()=>{
         dispatch(checkMyself())
-    }, [])   
+    }, [dispatch])   
 
 
-    let role:unknown = useSelector((state:RootState)=> state.user.role)
+    let role = useSelector((state:RootState)=> state.user.role)
 
-    if(role === 'root' || role === 'admin') {
-        return <>
-        <button onClick={()=>{dispatch(getUser())}}>Получить пользователей</button>
-        <UserProfile/>
+    if(role === Roles.root || role === Roles.admin) {
+        return (            
+            <UserProfile/>   
+        )
+    } 
+    else {
+        return (
+        <>
+            <div>{`К сожалению, наш дорогой гость, мы ничего о вас не знаем :(  поэтому можем вам предложить `} <br/> </div>
+            <Link href="/user/login">Войти <br/></Link>
+            <Link href="/user/register">Зарегистрироваться<br/></Link>
+            или <br/>
+            <Link href="/">Продолжить смотреть нашу прекрасную пустую главную страницу</Link>
         </>
-    } else {
-        return <>
-            <Link href="/">&#8592; Главная</Link>
-            <br/><br/><br/>
-            <Link href="/user/register">Регистрация</Link>
-            <br/><br/><br/>
-            <Link href="/user/login">Логинизация</Link>
-        </>
+        )
+      
     }
 }

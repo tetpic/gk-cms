@@ -6,9 +6,9 @@ export async function getMyself() {
     let token = STORAGE.getItem('Authenticate')
 
     //Серёгино апи
-    const request = await fetch( API_PATH + '/api/users?api_token='+token, {
+    const request = await fetch( API_PATH + '/api/users', {
         headers: {
-            'Authorisation' : `${token}`,
+            'Authorization' : `Bearer ${token}`,
             'Accept' : 'application/json',
             credentials: 'include'
         }

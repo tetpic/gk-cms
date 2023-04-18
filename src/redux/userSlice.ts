@@ -5,7 +5,13 @@ import { getMyself } from '@/app/api/user/user'
 import { STORAGE } from '@/helpers/constants'
 
 
-export const getUser = createAsyncThunk('users/checkUser', 
+/*
+название user/getUser должно быть уникальным, 
+иначе есть вероятность вызвать другую санку, 
+что приведет к неопределенным 
+последствиям, которые в дальнейшем сложно дебажить
+*/
+export const getUser = createAsyncThunk('users/getUser', 
     async function () {        
         const data = await getMyself()
         return  data
@@ -45,6 +51,7 @@ reducers:{
         let role = STORAGE.getItem('role') as unknown
         state.id = Number(STORAGE.getItem('id'))??undefined
         state.email = STORAGE.getItem('email')??''
+        state.name = STORAGE.getItem('userName')??''
         state.role = role as Roles??Roles.guest
         
     }

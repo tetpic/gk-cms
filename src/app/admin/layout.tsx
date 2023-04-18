@@ -18,11 +18,12 @@ export default function AdminMainLayout({
   let {auth, role} = useAppSelector(state=> state.user)
 
 
-    useEffect(() => {
-      require('bootstrap/dist/js/bootstrap');
-    }, []);
-
-    if (auth && role == Roles.admin) {
+  console.log(auth )
+  
+  if (role == Roles.admin || role == Roles.root) {
+      useEffect(() => {
+        require('bootstrap/dist/js/bootstrap');
+      }, []);
 
       return (
         <>

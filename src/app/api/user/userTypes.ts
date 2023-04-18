@@ -1,5 +1,5 @@
 
-export enum Roles { 'guest', 'admin', 'user', 'root' }
+export enum Roles {guest= 'guest',admin = 'admin', user=  'user',root = 'root' }
 
 export interface User {
     name: string,
