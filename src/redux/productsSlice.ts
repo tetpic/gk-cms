@@ -1,19 +1,12 @@
 "use client"
-import { getAllProducts, postNewProduct } from '@/app/api/products/products'
-import { AddNewProduct, NewProduct } from '@/app/api/products/productsTypes'
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { getAllProducts, postNewProduct, removeProduct } from '@/app/api/products/products'
+import {ProductsInitialState } from '@/types/product'
+import { createSlice, createAsyncThunk, current } from '@reduxjs/toolkit'
+import { RootState } from './store'
 
 
 
-export interface ProductsInitialState  {
-    products : any,
-    isAllProductsLoading: boolean,
-    isAddProductLoading: boolean,
-    error: string,
-    fetched: boolean,
-    newProduct: AddNewProduct
 
-}
 
 export const getProducts = createAsyncThunk('products/getProducts', 
     async function () {
@@ -23,34 +16,52 @@ export const getProducts = createAsyncThunk('products/getProducts',
 )
 
 export const postProduct = createAsyncThunk('products/postNewProduct', 
-
-    async function (object:NewProduct) {
-        const data = await postNewProduct(object)
+    async function (arg, {getState}) {
+        let {products} = getState() as RootState
+        const data = await postNewProduct(products.newProduct)
         return await data
     }
 )
 
-export  const productsSlice= createSlice({
-name:"products",
-initialState: <ProductsInitialState> {
+export const deleteProduct = createAsyncThunk('products/deleteProduct',
+    async function (arg: {id: number, index: number}) {
+        const response = await removeProduct(arg.id, arg.index)
+        return {response: response, index: arg.index}
+    }
+)
+
+let initialState: ProductsInitialState = {
     products: [],
     isAllProductsLoading: false,
     isAddProductLoading: false,
     error: '',
     fetched: false,
+    deleted: false,
     newProduct: {
-        productBody: '',
-        productTime: ''
-    }
-},
+        title: '', 
+        body:'', 
+        description:'',
+        tags: [], 
+        active: false,
+        price: 0,
+        discount: 0,
+    }    
+}
+
+export  const productsSlice= createSlice({
+name:"products",
+initialState: initialState,
 reducers:{
     addProduct(state, action) {
         state.products = [...state.products, action.payload]
     },
-    setProducts(state, action) {  
-        state.products = [...state.products, action.payload]
-        state.fetched = true
+    setNewProduct(state, action) {  
+        state.newProduct = {...state.newProduct, ...action.payload}     
+    },
+    deleteStatus(state) {
+        state.deleted = false
     }
+  
 },
 extraReducers: (builder) => {
 
@@ -61,19 +72,30 @@ extraReducers: (builder) => {
     builder.addCase(getProducts.fulfilled, (state, action) => {        
         state.products = [...action.payload] 
         state.isAllProductsLoading = false
+        state.fetched = true     
     })
     builder.addCase(postProduct.pending, (state)=> {
         state.isAddProductLoading = true
         state.error = ''
     })
-    builder.addCase(postProduct.fulfilled, (state, action)=> {
-        state.products = [...state.products, ...action.payload]
-        state.isAddProductLoading = false
+    builder.addCase(postProduct.fulfilled, (state, action)=> {        
+        state.products = [...state.products, action.payload]
+        state.isAddProductLoading = false  
+        state.deleted = true     
+    })   
+    builder.addCase(deleteProduct.fulfilled, (state, action)=> { 
+        //не стоит использовать мутирующие методы массива, то есть вместо splice стоит использовать slice
+        let currentState = [...current(state.products)]
+        let sliced = [...currentState.slice(0, action.payload.index), ...currentState.slice(action.payload.index+1)]
+        state.products = [...sliced]
+      
+                
     })
+    
 },
 })
 
 
 export default productsSlice.reducer
-export const { setProducts } = productsSlice.actions
+export const { setNewProduct, deleteStatus} = productsSlice.actions
 export const productAction = productsSlice.actions

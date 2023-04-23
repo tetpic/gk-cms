@@ -25,15 +25,17 @@ interface UserInitialState extends AuthUser  {
    
 }
 
+let role = STORAGE.getItem('role') as Roles
+
 let initialState :  UserInitialState = {
-    name: '',
-    email: '',  
-    message: '',
-    isLoading: false,
+    name: STORAGE.getItem('userName')??'',
+    email: STORAGE.getItem('email')??'',  
+    id: Number(STORAGE.getItem('id'))??undefined,
+    role: role,
+    auth: role !== 'guest'?true:false,
     error: undefined,     
-    id: undefined,
-    auth: false,
-    role: Roles.guest
+    isLoading: false,
+    message: '',
 }
 
 // create a slice 
@@ -53,7 +55,9 @@ reducers:{
         state.email = STORAGE.getItem('email')??''
         state.name = STORAGE.getItem('userName')??''
         state.role = role as Roles??Roles.guest
-        
+        if(role !== Roles.guest) {
+            state.auth = true
+        }        
     }
 },
 extraReducers(builder) {

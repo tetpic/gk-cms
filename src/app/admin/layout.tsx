@@ -1,7 +1,5 @@
-'use client';
 import { useRouter } from 'next/navigation';
 import AdminNavigation from './adminNavigation';
-import { useEffect } from 'react';
 import Image from 'next/image';
 import goriLogo from '../../../public/gorilka-logo.png';
 import s from './admin.module.scss';
@@ -9,21 +7,24 @@ import Link from 'next/link';
 import { useAppSelector } from '@/redux/types';
 import { Roles } from '../api/user/userTypes';
 
+
 export default function AdminMainLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
 
-  let {auth, role} = useAppSelector(state=> state.user)
-
-
-  console.log(auth )
+  // let {auth, role} = useAppSelector(state=> state.user)
   
-  if (role == Roles.admin || role == Roles.root) {
-      useEffect(() => {
-        require('bootstrap/dist/js/bootstrap');
-      }, []);
+  // const router = useRouter();
+
+  // console.log(auth )
+  
+  // if (role == Roles.admin || role == Roles.root) {       
+     
+  //     useEffect(() => {
+  //       require('bootstrap/dist/js/bootstrap');
+  //     }, [router]);
 
       return (
         <>
@@ -40,8 +41,7 @@ export default function AdminMainLayout({
         </div>
       </>
     );
-  } else {
-    const router = useRouter();
-    router.push('/');
-  }
+  // } else {
+  //   router.push('/');
+  // }
 }

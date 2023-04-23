@@ -1,36 +1,5 @@
 {
-  "products": [
-    {
-      "id": 1,
-      "data": "Incididunt exercitation excepteur pariatur qui laborum sit ullamco et eu cillum reprehenderit.",
-      "time": "15:20"
-    },
-    {
-      "id": 2,
-      "data": "Ipsum aliquip sunt nisi adipisicing. Reprehenderit nostrud exercitation duis officia laborum minim occaecat enim labore enim.",
-      "time": "15:30"
-    },
-    {
-      "id": 3,
-      "data": "Qui velit adipisicing magna est culpa anim laborum veniam irure magna consequat.Esse culpa adipisicing commodo cupidatat elit sit laboris exercitation duis.",
-      "time": "15:40"
-    },
-    {
-      "data": "Lorem ipsum dolor est",
-      "time": "14:30",
-      "id": 4
-    },
-    {
-      "data": "Lorem ipsum dolor est pelet oren",
-      "time": "14:32",
-      "id": 5
-    },
-    {
-      "data": "Тестовые данные на русском языке из POSTMAN",
-      "time": "14:32",
-      "id": 6
-    }
-  ],
+  "products": [],
   "users": [
     {
       "id": 1,

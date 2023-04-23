@@ -1,5 +1,5 @@
 export default function ProductsPage() {
     return <>
-    <div>Рендер товаров</div>
+    <h3>Товары</h3>
     </>
 }

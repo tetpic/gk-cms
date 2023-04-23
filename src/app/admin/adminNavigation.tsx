@@ -1,6 +1,8 @@
+"use client"
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import s from './admin.module.scss'
+// import {collapse} from 'bootstrap/js/dist/collapse'
 
 
 export default function  AdminNavigation() {
@@ -21,9 +23,8 @@ export default function  AdminNavigation() {
                       Каталог
                     </button>
                 </p>
-                <div id="collapseOne" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div id="collapseOne" className="accordion-collapse collapse show"  aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                   <div className="accordion-body">
-                    {/* <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classNamees that we use to style each element. These classNamees control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow. */}
                     <Link className={'nav-link ' + (router=='/admin/catalog/products'? s.active:'')}  aria-current="page" href="/admin/catalog/products">Товары</Link>
                     <Link className={'nav-link ' + (router=='/admin/catalog/news'? s.active:'')}  aria-current="page" href="/admin/catalog/news">Новости</Link>
                     <Link className={'nav-link ' + (router=='/admin/catalog/articles'? s.active:'')}  aria-current="page" href="/admin/catalog/articles">Статьи</Link>

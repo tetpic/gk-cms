@@ -5,11 +5,9 @@ import ProductsPage from "./productsClient"
 
 export default function ProductServerPage() {
   return <>
-    <h3>Товары</h3>
-      <div>
+    <h3>Товары</h3>      
         <AddNewProductForm/>
-        <ProductsPage />
-    </div>
+        <ProductsPage />   
   </>
  }
   

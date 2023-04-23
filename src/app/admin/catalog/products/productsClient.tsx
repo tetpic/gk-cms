@@ -1,44 +1,39 @@
 "use client"
 
-import {getProducts} from "@/redux/productsSlice"
+import {deleteProduct, getProducts} from "@/redux/productsSlice"
 import {RootState} from "@/redux/store"
 import {useAppDispatch } from "@/redux/types"
-import {useEffect, useRef } from "react"
+import {useEffect} from "react"
 import {useSelector } from "react-redux"
 
-type OneProduct = {
-    id: number,
-    data: string,
-    time: string
-}
-
-function product(props:OneProduct) {
-    return <>
-        <div key={props.id}>
-            <p>{props.id}</p>
-            <p>{props.data}</p>
-            <p>{props.time}</p>
-        </div>
-    </>
-}
 
 export default function ProductsPage() {
 
-    const ref = useRef(false);
-
     const {products, fetched} = useSelector((state:RootState)=> state.products)
-
+    
     const dispatch = useAppDispatch()
     useEffect(()=> {
            dispatch(getProducts())
     }, [dispatch])
 
-   return (<>
-       {
-           products.map((element:any) => {
-               return product(element)
-           })
-       }
-       </>
-   )
+    if(!fetched) {
+        return <>
+            <div className="spinner-border" role="status"></div>
+        </>
+    } else {
+        return (
+        <div className="mt-2 p-3 ">
+            {products.map((element:any, index: number) => {
+                return(
+                    <div className="bg-dark text-white d-flex p-2 justify-content-between mb-2" key={element.id}>         
+                    <p className="mb-0">{element.title}</p>           
+                    <p className="ms-auto mb-0">{element.price}</p>          
+                    <button type="button" onClick={()=> dispatch(deleteProduct({id: element.id, index: index}))} className="btn-close btn-close-white ms-2"  aria-label="Close"></button>
+                </div>
+                )
+                })
+            }
+        </div>
+        )
+    }
 }
