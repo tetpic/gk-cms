@@ -10,9 +10,7 @@ export default function AdminMain() {
     
     const router = useRouter();
     
-    useEffect(()=>{       
-        require('bootstrap/dist/js/bootstrap');
-    }, [router] )
+   
     
     let {auth, role} = useAppSelector(state=> state.user)
   

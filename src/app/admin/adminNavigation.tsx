@@ -2,11 +2,17 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import s from './admin.module.scss'
+import { useEffect } from "react";
 // import {collapse} from 'bootstrap/js/dist/collapse'
 
 
 export default function  AdminNavigation() {
-    const router = usePathname()
+
+  const router = usePathname()
+  useEffect(()=>{       
+    require('bootstrap/dist/js/bootstrap');
+  }, [router] )
+  
     return  <>
         <ul className={"nav flex-column col-3 " + s.nav}>
             <li className="nav-item bg-light rounded" key="mainLink">
@@ -30,6 +36,10 @@ export default function  AdminNavigation() {
                     <Link className={'nav-link ' + (router=='/admin/catalog/articles'? s.active:'')}  aria-current="page" href="/admin/catalog/articles">Статьи</Link>
                   </div>
                 </div>
+            </li>
+
+            <li className="nav-item bg-light rounded" key="usersLink">
+              <Link className={'nav-link  text-dark  ' + (router=='/admin/users'? s.active:'')} href="/admin/users">Пользователи</Link>
             </li>
 
             <li className="nav-item bg-light rounded" key="categoriesLink">

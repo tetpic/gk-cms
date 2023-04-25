@@ -5,6 +5,8 @@ import productsReducer from './productsSlice';
 import regReducer from './registratoinSlice';
 import loginReducer from './loginSlice';
 import userReducer from './userSlice';
+import usersAdminReducer from './usersAdminSlice';
+
 import { createWrapper, } from 'next-redux-wrapper';
 
 // config the store
@@ -13,7 +15,8 @@ const store = configureStore({
     products: productsReducer,
     register: regReducer,
     login: loginReducer, 
-    user: userReducer
+    user: userReducer,
+    userAdmin: usersAdminReducer,
   },
 });
 

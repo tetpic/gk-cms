@@ -11,6 +11,7 @@ export default function UserProfile() {
     return <>   
     <div className={s.navigationWrapper}>
         <Link className={s.link} href="/admin">Админка</Link>
+        <button className={s.link} >Выйти</button>
         <p>Имя пользователя: {user.name}</p> 
         <p>ID: {user.id}</p>
         <p>Email: {user.email}</p>
