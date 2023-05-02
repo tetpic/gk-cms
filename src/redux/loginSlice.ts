@@ -1,9 +1,9 @@
 "use client"
-import { sendUser } from '@/app/api/user/userLogin'
 import { LoginUser} from '@/app/api/user/userTypes'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { RootState } from './store'
 import { STORAGE } from '@/helpers/constants'
+import { sendUser } from '@/app/api/user/user'
 
 type UserDataResponse = {
     name: string,
@@ -65,8 +65,7 @@ extraReducers(builder) {
     builder.addCase(sendUserData.rejected, (state, action: any) => {     
         state.error = action.payload      
     }),
-    builder.addCase(sendUserData.fulfilled, (state, action) => {  
-        debugger            
+    builder.addCase(sendUserData.fulfilled, (state, action) => {            
         state.isLoading = false
         state.loggedIn = true  
         if(action.payload.id) {

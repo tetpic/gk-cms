@@ -1,8 +1,9 @@
 'use client'
 
 
+import { Roles } from "@/app/api/user/userTypes"
 import { useAppDispatch, useAppSelector } from "@/redux/types"
-import { getUsersAdmin, setFindBy, setFindString } from "@/redux/usersAdminSlice"
+import { changeRole, getUsersAdmin, setFindBy, setFindString } from "@/redux/usersAdminSlice"
 
 export default function ManageUsers () {
 
@@ -24,6 +25,14 @@ export default function ManageUsers () {
         dispatch(getUsersAdmin())
     }
 
+    function selectRoleHandler(evt: any) {
+        let data = {
+            id: Number(evt.target.parentElement.dataset.id) as number,
+            role: evt.target.value as Roles
+        }
+        dispatch(changeRole(data))
+    }
+
 
 
 
@@ -36,7 +45,6 @@ export default function ManageUsers () {
                   Поиск по: 
                 </button>
                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li className="dropdown-item btn" data-type="id" onClick={setFindTypeHandler} >ID</li>
                     <li className="dropdown-item btn" data-type="role"  onClick={setFindTypeHandler}>ROLE</li>
                     <li className="dropdown-item btn" data-type="email" onClick={setFindTypeHandler}>EMAIL</li>
                     <li className="dropdown-item btn" data-type="name"  onClick={setFindTypeHandler}>NAME</li>
@@ -49,7 +57,16 @@ export default function ManageUsers () {
         <p>{message}</p>
         {users.map((el:any)=>{
             return (
-                <div>{el.name}</div>
+                <div className="d-flex align-items-center bg-secondary p-2 text-white" data-id={el.id}>
+                    <p className="w-25 mb-0 ">Имя: {el.name} </p>
+                    <p className="w-25 mb-0">ID: {el.id} </p>
+                    <select className="form-select form-select-sm w-25 ms-auto" defaultValue={el.role} placeholder="Изменить роль" onChange={(evt)=>selectRoleHandler(evt)} aria-label="Small select">
+                        {/* <option selected={true}>Изменить роль</option> */}
+                        <option value={Roles.admin}>Админ</option>
+                        <option value={Roles.user}>Пользователь</option>
+                        <option value={Roles.root}>Бог</option>
+                    </select>
+                </div>
             )
         })}
     </>

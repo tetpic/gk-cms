@@ -1,9 +1,9 @@
 "use client"
-import { registerNewUser } from '@/app/api/user/userRegister'
 import { LoginUser} from '@/app/api/user/userTypes'
 import { configureStore } from '@reduxjs/toolkit'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { RootState } from './store'
+import { registerNewUser } from '@/app/api/user/user'
 
 
 interface UserInitialState {

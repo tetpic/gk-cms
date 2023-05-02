@@ -20,7 +20,7 @@ export default function User () {
 
     let role = useSelector((state:RootState)=> state.user.role)
 
-    if(role === Roles.root || role === Roles.admin) {
+    if(role !== Roles.guest) {
         return (            
             <UserProfile/>   
         )

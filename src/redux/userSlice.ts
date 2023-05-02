@@ -1,7 +1,7 @@
 "use client"
 import { AuthUser, Roles} from '@/app/api/user/userTypes'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { getMyself } from '@/app/api/user/user'
+import { getMyself, logOutUser } from '@/app/api/user/user'
 import { STORAGE } from '@/helpers/constants'
 
 
@@ -15,6 +15,13 @@ export const getUser = createAsyncThunk('users/getUser',
     async function () {        
         const data = await getMyself()
         return  data
+    }
+)
+
+export const logOut = createAsyncThunk('users/logOut',
+    async function() {
+        const data = await logOutUser()
+        return data
     }
 )
 
@@ -71,6 +78,16 @@ extraReducers(builder) {
         console.log(action.payload)
         state.isLoading = false         
     })   
+    builder.addCase(logOut.fulfilled, (state, action)=> {
+        if(action.payload.status == 'success') {
+            STORAGE.clear()
+        }
+        state.auth = false
+        state.id = undefined
+        state.email = ''
+        state.name = ''
+        state.role = Roles.guest
+    })
 },
 
 })

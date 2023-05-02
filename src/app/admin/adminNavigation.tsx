@@ -25,11 +25,11 @@ export default function  AdminNavigation() {
 
             <li className="nav-item accordion bg-light rounded" key="catalogLink">
                 <p className="accordion-header" id="headingOne">
-                    <button className={"accordion-button text-dark  rounded " + (router.indexOf('/admin/catalog/') >= 0? s.active:'')} type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <button className={"accordion-button text-dark collapsed  rounded " + (router.indexOf('/admin/catalog/') >= 0? s.active:'')} type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                       Каталог
                     </button>
                 </p>
-                <div id="collapseOne" className="accordion-collapse collapse show"  aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div id="collapseOne" className="accordion-collapse collapse"  aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                   <div className="accordion-body">
                     <Link className={'nav-link ' + (router=='/admin/catalog/products'? s.active:'')}  aria-current="page" href="/admin/catalog/products">Товары</Link>
                     <Link className={'nav-link ' + (router=='/admin/catalog/news'? s.active:'')}  aria-current="page" href="/admin/catalog/news">Новости</Link>
