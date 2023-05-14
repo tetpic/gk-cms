@@ -2,7 +2,7 @@ import { AdminUsersInitialState, UserFindBy } from "@/types/users";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 import { changeUserRole, getUsers } from "@/app/api/user/user";
-import { Roles } from "@/app/api/user/userTypes";
+import { Roles } from "@/types/userTypes";
 
 
 

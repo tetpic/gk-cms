@@ -2,7 +2,7 @@
 
 import { useAppDispatch, useAppSelector } from "@/redux/types";
 import { useRouter } from "next/navigation";
-import { Roles } from "../api/user/userTypes";
+import { Roles } from "../../types/userTypes";
 import { useEffect } from "react";
 import { checkMyself } from "@/redux/userSlice";
 

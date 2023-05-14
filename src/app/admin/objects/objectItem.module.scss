@@ -1,0 +1,19 @@
+.product{
+    display: flex;
+    // flex-direction: column;
+    row-gap: 10px;
+    background-color: #3d5033;
+    padding: 20px;
+    border-radius: 20px;   
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    &__body, &__description {
+        width: 100%;
+    }
+
+    
+
+   
+}

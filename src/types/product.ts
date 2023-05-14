@@ -15,7 +15,13 @@ export interface CreatedProduct extends Product {
     timeChanged: string,   
     position: number, 
     active: boolean,  
-    eventId: number
+    eventId: number,
+    body: string,
+    title: string,   
+    description: string,
+    tags: string[],  
+    price: number,
+    discount: number,
 }
 
 export interface AddNewProduct {

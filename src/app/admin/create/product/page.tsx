@@ -5,7 +5,7 @@ import ProductsPage from "./productsClient"
 
 export default function ProductServerPage() {
   return <>
-    <h3>Товары</h3>      
+    <h3>Создать новый товар</h3>      
         <AddNewProductForm/>
         <ProductsPage />   
   </>

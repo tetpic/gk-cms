@@ -7,7 +7,7 @@ import UserProfile from "./userProfile";
 import { useAppDispatch } from "@/redux/types";
 import { getUser, checkMyself } from "@/redux/userSlice";
 import { useEffect } from "react";
-import { Roles } from "../api/user/userTypes";
+import { Roles } from "../../types/userTypes";
 import UserPageLayout from "./layout";
 
 export default function User () {

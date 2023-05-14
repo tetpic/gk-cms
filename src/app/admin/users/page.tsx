@@ -1,9 +1,9 @@
 'use client'
 
 
-import { Roles } from "@/app/api/user/userTypes"
 import { useAppDispatch, useAppSelector } from "@/redux/types"
 import { changeRole, getUsersAdmin, setFindBy, setFindString } from "@/redux/usersAdminSlice"
+import { Roles } from "@/types/userTypes"
 
 export default function ManageUsers () {
 

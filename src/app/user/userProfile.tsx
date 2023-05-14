@@ -5,7 +5,7 @@ import s from "./user.module.scss"
 import { useAppDispatch } from "@/redux/types";
 import { logOut } from "@/redux/userSlice";
 import { useRouter } from "next/navigation";
-import { Roles } from "../api/user/userTypes";
+import { Roles } from "../../types/userTypes";
 
 
 /** Личный кабинет пользователя */

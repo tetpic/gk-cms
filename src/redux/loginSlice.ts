@@ -1,9 +1,9 @@
 "use client"
-import { LoginUser} from '@/app/api/user/userTypes'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { RootState } from './store'
 import { STORAGE } from '@/helpers/constants'
 import { sendUser } from '@/app/api/user/user'
+import { LoginUser } from '@/types/userTypes'
 
 type UserDataResponse = {
     name: string,

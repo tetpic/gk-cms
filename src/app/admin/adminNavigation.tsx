@@ -20,20 +20,21 @@ export default function  AdminNavigation() {
             </li>
 
             <li className="nav-item bg-light rounded" key="productsLink">
-              <Link className={'nav-link  text-dark  ' + (router=='/admin/products'? s.active:'')} href="/admin/products">Товары</Link>
+              <Link className={'nav-link  text-dark  ' + (router=='/admin/objects'? s.active:'')} href="/admin/objects">Объекты</Link>
             </li>
 
             <li className="nav-item accordion bg-light rounded" key="catalogLink">
                 <p className="accordion-header" id="headingOne">
                     <button className={"accordion-button text-dark collapsed  rounded " + (router.indexOf('/admin/catalog/') >= 0? s.active:'')} type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                      Каталог
+                      Создать 
                     </button>
                 </p>
                 <div id="collapseOne" className="accordion-collapse collapse"  aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                   <div className="accordion-body">
-                    <Link className={'nav-link ' + (router=='/admin/catalog/products'? s.active:'')}  aria-current="page" href="/admin/catalog/products">Товары</Link>
-                    <Link className={'nav-link ' + (router=='/admin/catalog/news'? s.active:'')}  aria-current="page" href="/admin/catalog/news">Новости</Link>
-                    <Link className={'nav-link ' + (router=='/admin/catalog/articles'? s.active:'')}  aria-current="page" href="/admin/catalog/articles">Статьи</Link>
+                    <Link className={'nav-link ' + (router=='/admin/create/product'? s.active:'')}  aria-current="page" href="/admin/create/product">Товар</Link>
+                    <Link className={'nav-link ' + (router=='/admin/create/news'? s.active:'')}  aria-current="page" href="/admin/create/news">Новость</Link>
+                    <Link className={'nav-link ' + (router=='/admin/create/article'? s.active:'')}  aria-current="page" href="/admin/create/article">Статья</Link>
+                    <Link className={'nav-link ' + (router=='/admin/create/event'? s.active:'')}  aria-current="page" href="/admin/create/event">Событие</Link>
                   </div>
                 </div>
             </li>

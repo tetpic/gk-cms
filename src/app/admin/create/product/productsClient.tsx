@@ -23,6 +23,7 @@ export default function ProductsPage() {
     } else {
         return (
         <div className="mt-2 p-3 ">
+            <p>Недавно созданные товары</p>
             {products.map((element:any, index: number) => {
                 return(
                     <div className="bg-dark text-white d-flex p-2 justify-content-between mb-2" key={element.id}>         

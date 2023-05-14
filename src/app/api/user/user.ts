@@ -1,23 +1,20 @@
 import { API_PATH, STORAGE } from "@/helpers/constants";
-import { LoginUser, Roles, User } from "./userTypes";
+import { LoginUser, Roles, User } from "../../../types/userTypes";
 import { UserFindBy } from "@/types/users";
 
-export const token: string|null = STORAGE.getItem('Authenticate')
+export const token: string|null = STORAGE.getItem('Authenticate')??null
 export const authHeader = {
-    'Authorization': `Bearer ${token}`
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json;charset=utf-8',
+    'Accept' : 'application/json',
+    credentials: 'include',
 }
 
 
 export async function getMyself() {
-    // const request = await fetch('http://localhost:4000/users', {
 
-    //Серёгино апи
     const request = await fetch( API_PATH + '/api/users', {
-        headers: {
-            'Authorization' : `Bearer ${token}`,
-            'Accept' : 'application/json',
-            credentials: 'include'
-        }
+        headers: authHeader
     })
     const response = await request.json();
     
@@ -26,6 +23,7 @@ export async function getMyself() {
 
 
 export async function logOutUser() {
+
     const request = await fetch(API_PATH + '/api/logout', {
         method: 'POST',
         headers: authHeader
@@ -36,10 +34,8 @@ export async function logOutUser() {
 
 
 export async function sendUser(userData: LoginUser) {
-    let json = JSON.stringify(userData)  
-   
 
-    //Серёгино апи
+    let json = JSON.stringify(userData)  
     const request = await fetch(API_PATH+'/api/login', {
         method: "POST",
         headers: {
@@ -54,10 +50,8 @@ export async function sendUser(userData: LoginUser) {
 
 
 export async function registerNewUser(data: User) {
-    let json = JSON.stringify(data)   
 
-    //Серегино апи
-    
+    let json = JSON.stringify(data)   
     const request = await fetch( API_PATH + '/api/reg', {
         method: "POST",
         headers: {
@@ -74,11 +68,7 @@ export async function getUsers (object : {findBy: UserFindBy, findString: string
     let queryParams = object.findBy == 'unset'?'':'?' + object.findBy + '=' + object.findString
     let request = await fetch(API_PATH + '/api/root/get-users'+queryParams, {
         method:"GET",
-        headers: {
-            ...authHeader,            
-            'Accept' : 'application/json',
-            credentials: 'include',
-        }
+        headers: authHeader
     })
 
     let response = await request.json()
@@ -91,9 +81,7 @@ export async function changeUserRole(obj: {id: number, role: Roles}) {
     let data = JSON.stringify(obj)
     let request = await fetch (API_PATH + '/api/root/change-users-role', {
         method: 'POST',
-        headers: {
-            'Authorization': 'Bearer ' + token,
-        },
+        headers: authHeader,
         body: data
     })
     let response = await request.json()

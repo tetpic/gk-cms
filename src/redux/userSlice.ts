@@ -1,8 +1,8 @@
 "use client"
-import { AuthUser, Roles} from '@/app/api/user/userTypes'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { getMyself, logOutUser } from '@/app/api/user/user'
 import { STORAGE } from '@/helpers/constants'
+import { AuthUser, Roles } from '@/types/userTypes'
 
 
 /*
@@ -92,8 +92,6 @@ extraReducers(builder) {
 
 })
 
-//export the reducer
 export default userSlice.reducer
-// export the action
 export const {setName,setEmail, checkMyself} = userSlice.actions
 export const loginAction = userSlice.actions

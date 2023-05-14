@@ -1,11 +1,9 @@
-import { useRouter } from 'next/navigation';
 import AdminNavigation from './adminNavigation';
 import Image from 'next/image';
 import goriLogo from '../../../public/gorilka-logo.png';
 import s from './admin.module.scss';
 import Link from 'next/link';
-import { useAppSelector } from '@/redux/types';
-import { Roles } from '../api/user/userTypes';
+
 
 
 export default function AdminMainLayout({
@@ -13,20 +11,7 @@ export default function AdminMainLayout({
 }: {
   children: React.ReactNode;
 }) {
-
-  // let {auth, role} = useAppSelector(state=> state.user)
-  
-  // const router = useRouter();
-
-  // console.log(auth )
-  
-  // if (role == Roles.admin || role == Roles.root) {       
-     
-  //     useEffect(() => {
-  //       require('bootstrap/dist/js/bootstrap');
-  //     }, [router]);
-
-      return (
+    return (
         <>
         <div className={s.header}>
           <Image src={goriLogo} alt="gorika logo" width={60} />
@@ -40,8 +25,5 @@ export default function AdminMainLayout({
           <section className="col-8">{children}</section>
         </div>
       </>
-    );
-  // } else {
-  //   router.push('/');
-  // }
+    ); 
 }
