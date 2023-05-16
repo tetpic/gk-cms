@@ -1,27 +1,22 @@
 export type Product = {
     title: string, 
-    body?:string, 
-    description?:string,
-    tags?: string[], 
-    active: boolean,
-    price?: number,
-    discount?: number,
+    body?:string|undefined, 
+    description?:string|undefined,
+    tags?: string[]|undefined, 
+    active: boolean|undefined,
+    price?: number|undefined,
+    discount?: number|undefined,
 }
 
+
 export interface CreatedProduct extends Product {
-    id:number, 
-    userId:number,    
-    timeCreated: string, 
-    timeChanged: string,   
-    position: number, 
-    active: boolean,  
+    id:number|undefined, 
+    userId:number|undefined,    
+    timeCreated: string|undefined, 
+    timeChanged: string|undefined,   
+    position: number|undefined,   
     eventId: number,
-    body: string,
-    title: string,   
-    description: string,
-    tags: string[],  
-    price: number,
-    discount: number,
+    body: string,   
 }
 
 export interface AddNewProduct {

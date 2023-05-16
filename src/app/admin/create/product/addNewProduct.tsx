@@ -6,7 +6,7 @@ import { RootState } from "@/redux/store"
 import { useAppDispatch } from "@/redux/types"
 import { useSelector } from "react-redux"
 
-export default function AddNewProductForm() {
+export default function EditProductForm() {
   
     let {title, body, description, price, discount} = useSelector((state:RootState)=> state.products.newProduct)
     let deleted = useSelector((state:RootState)=> state.products.deleted)

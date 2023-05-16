@@ -37,7 +37,7 @@ export default function ProductsPage() {
         <p className="tip">Здесь вы можете отсортировать и отредактировать ваши объекты</p>
         <button  onClick={()=>btnHandler('title')}>Имя</button>
         <button onClick={()=>btnHandler('timeCreated')}>Дата создания</button>
-        <button onClick={()=>btnHandler('timeCreated')}>Дата создания</button>
+        <button onClick={()=>btnHandler('timeEdited')}>Дата создания</button>
         {sorted.map((el:CreatedProduct)=>{
             return (<>
                 <ProductObjectItem {...el}/>
@@ -47,5 +47,5 @@ export default function ProductsPage() {
     }
 
     </>):
-    (<> <p>...загрузка</p> </>)
+    (<> <div className="spinner-border spinner-border-sm" role="status"></div> </>)
 }
